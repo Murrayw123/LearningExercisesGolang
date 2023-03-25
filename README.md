@@ -17,4 +17,6 @@ A series of exercises ChatGPT generated to help me learn specific parts of progr
 - Create a package that defines a Game interface with two methods Play() and GameOver(). Then, create structs for TicTacToe, Chess, and Checkers that implement the Game interface. Use these structs to play different types of games and determine when the game is over.
 
 
+## Data structures, slicing, and maps
+
 

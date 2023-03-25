@@ -1,6 +1,9 @@
 package OOP
 
-import "errors"
+import (
+	"errors"
+	"fmt"
+)
 
 type BankAccount struct {
 	balance      float64
@@ -40,4 +43,15 @@ func (b *BankAccount) validateBalance(withdrawAmount float64) (BalanceStates, er
 	} else {
 		return healthy, nil
 	}
+}
+
+func OOPExerciseFour() {
+	bankAccount := BankAccount{}
+	bankAccount.Deposit(100)
+	balance, err := bankAccount.Withdraw(50)
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println("Balance: ", balance)
+
 }

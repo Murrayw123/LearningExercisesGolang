@@ -1,52 +1,62 @@
 package OOP
 
-import "go/types"
+import (
+	"fmt"
+)
 
 type Vehicle interface {
-	Start() types.Nil
-	Stop() types.Nil
+	Start() string
+	Stop() string
+	GetStatus() string
 }
 
-type Car struct{}
-
-type Motorcycle struct{}
-
-type Truck struct{}
-
-func (c Car) Start() types.Nil {
-	return c.Start()
+type VehicleImpl struct {
+	status string
 }
 
-func (c Car) Stop() types.Nil {
-	return c.Stop()
+func newVehicle() VehicleImpl {
+	return VehicleImpl{
+		status: "Stopped",
+	}
 }
 
-func (m Motorcycle) Start() types.Nil {
-	return m.Start()
+func (v *VehicleImpl) GetStatus() string {
+	return v.status
 }
 
-func (m Motorcycle) Stop() types.Nil {
-	return m.Stop()
+func (v *VehicleImpl) Start() string {
+	v.status = "Started"
+	return "Starting Vehicle"
 }
 
-func (t Truck) Start() types.Nil {
-	return t.Start()
+func (v *VehicleImpl) Stop() string {
+	v.status = "Stopped"
+	return "Stopping Vehicle"
 }
 
-func (t Truck) Stop() types.Nil {
-	return t.Stop()
+type Car struct {
+	VehicleImpl
+}
+
+type Motorcycle struct {
+	VehicleImpl
+}
+
+type Truck struct {
+	VehicleImpl
 }
 
 func OOPExerciseTwo() {
-	car := Car{}
-	motorcycle := Motorcycle{}
-	truck := Truck{}
 
-	car.Start()
-	car.Stop()
+	car := Car{newVehicle()}
+	motorcycle := Motorcycle{newVehicle()}
 
-	motorcycle.Start()
-	motorcycle.Stop()
+	fmt.Println("car status", car.GetStatus())
+	fmt.Println("car starting", car.Start())
+	fmt.Println("car status", car.GetStatus())
 
-	truck.Start()
+	fmt.Println("motorcycle status", motorcycle.GetStatus())
+	fmt.Println("motorcycle starting", motorcycle.Start())
+	fmt.Println("motorcycle status", motorcycle.GetStatus())
+
 }
