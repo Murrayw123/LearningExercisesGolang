@@ -23,8 +23,6 @@ A series of exercises ChatGPT generated to help me learn idiomatic patterns of p
 
 - Write a program that simulates a race condition by concurrently incrementing a variable. Use a mutex to protect the variable from concurrent access and print the final value of the variable after all goroutines have completed.
 
-- Create a program that downloads multiple files concurrently using goroutines. Use a waitgroup to ensure that all downloads have completed before exiting the program. Use a mutex to protect the downloaded files from concurrent writes.
-
 - Write a program that simulates a restaurant with multiple tables and customers. Use a waitgroup to ensure that all customers have finished eating before closing the restaurant. Use a mutex to protect the tables from concurrent access and ensure that each customer is assigned to a free table before being served.
 
 ## Data structures, slicing, and maps

@@ -19,6 +19,8 @@ func main() {
 	//Concurrency.ExerciseOne()
 	//fmt.Println("Exercise Two - Concurrency")
 	//Concurrency.ExerciseTwo()
-	fmt.Println("Exercise Three - Concurrency")
-	Concurrency.ExerciseThree()
+	//fmt.Println("Exercise Three - Concurrency")
+	//Concurrency.ExerciseThree()
+	fmt.Println("Exercise Four - Concurrency")
+	Concurrency.ExerciseFour()
 }
