@@ -9,6 +9,7 @@ import (
 type Customer struct {
 	eating bool
 	name   string
+	wg     *sync.WaitGroup
 }
 
 type Customers struct {
@@ -21,9 +22,9 @@ type Table struct {
 	capacity  int
 }
 
-func (c *Customer) Eat(wg *sync.WaitGroup) {
+func (c *Customer) Eat() {
 	fmt.Println(c.name, "is eating")
-	defer wg.Done()
+	defer c.wg.Done()
 	c.eating = true
 	time.Sleep(time.Duration(2) * time.Second)
 	c.eating = false
@@ -34,6 +35,7 @@ func newCustomer(name string, wg *sync.WaitGroup) *Customer {
 	return &Customer{
 		eating: false,
 		name:   name,
+		wg:     wg,
 	}
 }
 
@@ -120,7 +122,7 @@ func ExerciseFour() {
 				if table.HasSpace() {
 					if table.SeatCustomer(customer) {
 						customerCollection.RemoveWaitingCustomer(customer)
-						go customer.Eat(&wg)
+						go customer.Eat()
 						break
 					}
 				}
