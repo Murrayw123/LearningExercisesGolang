@@ -25,6 +25,17 @@ A series of exercises ChatGPT generated to help me learn idiomatic patterns of p
 
 - Write a program that simulates a restaurant with multiple tables and customers. Use a waitgroup to ensure that all customers have finished eating before closing the restaurant. Use a mutex to protect the tables from concurrent access and ensure that each customer is assigned to a free table before being served.
 
-## Data structures, slicing, and maps
+## Lists, slicing, and maps
+
+- Write a program that reads a list of integers from the command line, stores them in a slice, and then calculates the average of the numbers in the slice.
+
+- Implement a function that takes a slice of integers and returns a new slice that contains only the unique elements of the original slice.
+
+- Write a program that reads a string from the command line, stores the frequency of each word in the string in a map, and then prints out the word frequencies.
+
+- Implement a function that takes a map[string]int and returns a new map with the keys and values swapped (i.e., the original values become keys, and the original keys become values).
+
+- Write a program that reads a list of words from the command line, stores them in a slice, and then sorts the slice in alphabetical order.
+
 
 

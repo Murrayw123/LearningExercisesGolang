@@ -8,26 +8,45 @@ import (
 
 type Customer struct {
 	eating bool
+	seated bool
 	name   string
 	wg     *sync.WaitGroup
-}
-
-type Customers struct {
-	mu        *sync.Mutex
-	customers []Customer
+	mu     *sync.Mutex
 }
 
 type Table struct {
-	customers []Customer
+	customers []*Customer
 	capacity  int
+	mu        *sync.Mutex
 }
 
 func (c *Customer) Eat() {
-	fmt.Println(c.name, "is eating")
-	defer c.wg.Done()
+	c.mu.Lock()
 	c.eating = true
+	c.mu.Unlock()
+
+	fmt.Println(c.name, "is eating")
 	time.Sleep(time.Duration(2) * time.Second)
+
+	c.mu.Lock()
 	c.eating = false
+	c.mu.Unlock()
+
+	fmt.Println(c.name, "is done eating")
+	c.wg.Done()
+}
+
+func (c *Customer) SitDown() {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	fmt.Println(c.name, "is sitting down")
+	c.seated = true
+}
+
+func (c *Customer) IsSeated() bool {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	return c.seated
 }
 
 func newCustomer(name string, wg *sync.WaitGroup) *Customer {
@@ -36,50 +55,21 @@ func newCustomer(name string, wg *sync.WaitGroup) *Customer {
 		eating: false,
 		name:   name,
 		wg:     wg,
+		mu:     &sync.Mutex{},
 	}
 }
 
-func (c *Customers) GetCustomersRemaining() int {
-	c.mu.Lock()
-	defer c.mu.Unlock()
-	return len(c.customers)
-}
-
-func (c *Customers) RemoveWaitingCustomer(customer Customer) {
-	c.mu.Lock()
-	defer c.mu.Unlock()
-	for i, cust := range c.customers {
-		if cust == customer {
-			c.customers = append(c.customers[:i], c.customers[i+1:]...)
-			break
-		}
-	}
-}
-
-func (c *Customers) GetNextCustomer() Customer {
-	c.mu.Lock()
-	defer c.mu.Unlock()
-	fmt.Println("getting next customer", len(c.customers))
-	return c.customers[0]
-}
-
-func (c *Customers) GetAllCustomers() []Customer {
-	c.mu.Lock()
-	defer c.mu.Unlock()
-	return c.customers
-}
-
-func (t *Table) SeatCustomer(customer Customer) bool {
+func (t *Table) SeatCustomer(customer *Customer) {
+	t.mu.Lock()
+	defer t.mu.Unlock()
 	fmt.Println("seating", customer.name, "at table", t.capacity)
-	if len(t.customers) < t.capacity {
-		t.customers = append(t.customers, customer)
-		return true
-	} else {
-		return false
-	}
+	fmt.Println("existing customers", len(t.customers), "capacity", t.capacity)
+	t.customers = append(t.customers, customer)
 }
 
-func (t *Table) RemoveCustomer(customer Customer) {
+func (t *Table) RemoveCustomerFromTable(customer *Customer) {
+	t.mu.Lock()
+	defer t.mu.Unlock()
 	for i, c := range t.customers {
 		if c == customer {
 			t.customers = append(t.customers[:i], t.customers[i+1:]...)
@@ -90,41 +80,41 @@ func (t *Table) RemoveCustomer(customer Customer) {
 }
 
 func (t *Table) HasSpace() bool {
+	t.mu.Lock()
+	defer t.mu.Unlock()
 	return len(t.customers) < t.capacity
 }
 
 func ExerciseFour() {
 	wg := sync.WaitGroup{}
-	customerMutex := sync.Mutex{}
 
-	tables := []Table{
-		{capacity: 3},
-		{capacity: 4},
-		{capacity: 5},
+	tables := []*Table{
+		{customers: make([]*Customer, 0), capacity: 3, mu: &sync.Mutex{}},
+		{customers: make([]*Customer, 0), capacity: 4, mu: &sync.Mutex{}},
+		{customers: make([]*Customer, 0), capacity: 5, mu: &sync.Mutex{}},
 	}
 
 	customers := make([]Customer, 0)
 
-	for i := 0; i < 100; i++ {
+	for i := 0; i < 10; i++ {
 		customers = append(customers, *newCustomer(fmt.Sprintf("Customer %d", i), &wg))
 	}
 
-	customerCollection := Customers{
-		mu:        &customerMutex,
-		customers: customers,
-	}
-
-	customerCollection.customers = customers
-
-	for customerCollection.GetCustomersRemaining() > 0 {
-		for _, customer := range customerCollection.GetAllCustomers() {
+	for i := range customers {
+		customer := customers[i]
+		fmt.Println("customer", customer.name, "is waiting to be seated")
+		seated := false
+		for !seated {
 			for _, table := range tables {
 				if table.HasSpace() {
-					if table.SeatCustomer(customer) {
-						customerCollection.RemoveWaitingCustomer(customer)
-						go customer.Eat()
-						break
-					}
+					table.SeatCustomer(&customer)
+					customer.SitDown()
+					go func(customer *Customer, table *Table) {
+						customer.Eat()
+						table.RemoveCustomerFromTable(customer)
+					}(&customer, table)
+					seated = true
+					break
 				}
 			}
 		}
