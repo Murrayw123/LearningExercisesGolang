@@ -1,7 +1,7 @@
 package main
 
 import (
-	"ChatGPTExercises/Concurrency"
+	"ChatGPTExercises/DataStructures"
 	"fmt"
 )
 
@@ -21,6 +21,8 @@ func main() {
 	//Concurrency.ExerciseTwo()
 	//fmt.Println("Exercise Three - Concurrency")
 	//Concurrency.ExerciseThree()
-	fmt.Println("Exercise Four - Concurrency")
-	Concurrency.ExerciseFour()
+	//fmt.Println("Exercise Four - Concurrency")
+	//Concurrency.ExerciseFour()
+	fmt.Println("Data Structures One")
+	DataStructures.DataStructuresOne()
 }

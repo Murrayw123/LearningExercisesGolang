@@ -14,7 +14,6 @@ A series of exercises ChatGPT generated to help me learn idiomatic patterns of p
 
 - Create a package that defines a Game interface with two methods Play() and GameOver(). Then, create structs for TicTacToe, Chess, and Checkers that implement the Game interface. Use these structs to play different types of games and determine when the game is over.
 
-
 ## Concurrency
 
 - Write a program that simulates a bank account with multiple concurrent transactions. Each transaction will either deposit or withdraw a random amount of money from the account. Use a mutex to protect the account balance from concurrent access and a waitgroup to ensure that all transactions have completed before printing the final balance.
@@ -27,7 +26,7 @@ A series of exercises ChatGPT generated to help me learn idiomatic patterns of p
 
 ## Lists, slicing, and maps
 
-- Write a program that reads a list of integers from the command line, stores them in a slice, and then calculates the average of the numbers in the slice.
+- convert a string array of numbers to a slice, and then calculates the average of the numbers in the slice.
 
 - Implement a function that takes a slice of integers and returns a new slice that contains only the unique elements of the original slice.
 
