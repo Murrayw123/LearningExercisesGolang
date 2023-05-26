@@ -36,5 +36,8 @@ A series of exercises ChatGPT generated to help me learn idiomatic patterns of p
 
 - Write a program that reads a list of words from the command line, stores them in a slice, and then sorts the slice in alphabetical order.
 
+### Testing
 
+- String Reversal Function: Write a function that takes in a string and returns it reversed. Write unit tests to confirm that your function is working correctly. 
 
+- Write a function that takes in a slice of integers and a function that modifies each integer. This function should return a new slice with each integer modified by the function.

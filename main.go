@@ -23,6 +23,13 @@ func main() {
 	//Concurrency.ExerciseThree()
 	//fmt.Println("Exercise Four - Concurrency")
 	//Concurrency.ExerciseFour()
-	fmt.Println("Data Structures One")
-	DataStructures.DataStructuresOne()
+	//fmt.Println("Data Structures One")
+	//DataStructures.DataStructuresOne()
+	//fmt.Println("Data Structures Two")
+	//DataStructures.DataStructuresTwo()
+	//fmt.Println("Data Structures Three")
+	//DataStructures.DataStructuresThree()
+	fmt.Println("Data Structures Four")
+	DataStructures.DataStructuresFour()
+
 }
