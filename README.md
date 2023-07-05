@@ -24,6 +24,16 @@ A series of exercises ChatGPT generated to help me learn idiomatic patterns of p
 
 - Write a program that simulates a restaurant with multiple tables and customers. Use a waitgroup to ensure that all customers have finished eating before closing the restaurant. Use a mutex to protect the tables from concurrent access and ensure that each customer is assigned to a free table before being served.
 
+### Idiomatic Concurrency
+
+- Write a function called fanIn that takes two input channels, c1 and c2, and returns a single channel that combines the values from both input channels. The function should read values from both channels and send them to the output channel as they arrive. Finally, you can close the output channel after both input channels have been closed.
+
+- Implement a simple producer-consumer scenario using channels. Create a producer goroutine that generates a sequence of numbers and sends them to a channel. Create multiple consumer goroutines that receive numbers from the channel and perform some computation on them.
+
+- Write a function called fanOut that takes an input channel in and a slice of output channels outs. The function should read values from the input channel and distribute them to all output channels in a round-robin fashion. When the input channel is closed, all output channels should be closed as well.
+
+- Write a function called timeout that takes an input channel in and a timeout duration. The function should read from the input channel, but if no value is received within the specified timeout, it should print a timeout message and return. You can achieve this by combining a select statement with a time.After channel.
+
 ## Lists, slicing, and maps
 
 - convert a string array of numbers to a slice, and then calculates the average of the numbers in the slice.

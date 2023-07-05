@@ -1,10 +1,20 @@
 package Testing
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 func TestTestingTwo(t *testing.T) {
-	res := TestingTwo("Hello")
-	if res != "olleH" {
-		t.Errorf("Expected Hello, got %s", res)
+	sampleInts := [5]int{1, 2, 3, 4, 5}
+
+	fmt.Println("Test 1", sampleInts)
+	res := TestingTwo(sampleInts)
+	fmt.Println("Test 2", sampleInts)
+
+	for i, v := range res {
+		if v != sampleInts[i]+1 {
+			t.Errorf("Expected %d, got %d", sampleInts[i]+1, v)
+		}
 	}
 }

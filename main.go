@@ -1,7 +1,7 @@
 package main
 
 import (
-	"ChatGPTExercises/DataStructures"
+	"ChatGPTExercises/ConcurrencyIdiomatic"
 	"fmt"
 )
 
@@ -29,7 +29,12 @@ func main() {
 	//DataStructures.DataStructuresTwo()
 	//fmt.Println("Data Structures Three")
 	//DataStructures.DataStructuresThree()
-	fmt.Println("Data Structures Four")
-	DataStructures.DataStructuresFour()
+	//fmt.Println("Data Structures Four")
+	//DataStructures.DataStructuresFour()
+
+	//fmt.Println("Concurrency Idiomatic 1")
+	//ConcurrencyIdiomatic.ConcurrencyIdiomatic1()
+	fmt.Println("Concurrency Idiomatic 2")
+	ConcurrencyIdiomatic.ConcurrencyIdiomatic2()
 
 }
