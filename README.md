@@ -30,6 +30,8 @@ A series of exercises ChatGPT generated to help me learn idiomatic patterns of p
 
 - Implement a simple producer-consumer scenario using channels. Create a producer goroutine that generates a sequence of numbers and sends them to a channel. Create multiple consumer goroutines that receive numbers from the channel and perform some computation on them.
 
+- Pipeline: Implement a pipeline for processing a stream of integers. The pipeline should have three stages: doubling the numbers, filtering out even numbers, and summing the remaining numbers. Use channels to connect the stages and pass the data between them.
+
 - Write a function called fanOut that takes an input channel in and a slice of output channels outs. The function should read values from the input channel and distribute them to all output channels in a round-robin fashion. When the input channel is closed, all output channels should be closed as well.
 
 - Write a function called timeout that takes an input channel in and a timeout duration. The function should read from the input channel, but if no value is received within the specified timeout, it should print a timeout message and return. You can achieve this by combining a select statement with a time.After channel.
