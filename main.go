@@ -36,7 +36,10 @@ func main() {
 	//ConcurrencyIdiomatic.ConcurrencyIdiomatic1()
 	//fmt.Println("Concurrency Idiomatic 2")
 	//ConcurrencyIdiomatic.ConcurrencyIdiomatic2()
-	fmt.Println("Concurrency Idiomatic 3")
-	ConcurrencyIdiomatic.ConcurrencyIdiomatic3()
-
+	//fmt.Println("Concurrency Idiomatic 3")
+	//ConcurrencyIdiomatic.ConcurrencyIdiomatic3()
+	//fmt.Println("Concurrency Idiomatic 4")
+	//ConcurrencyIdiomatic.ConcurrencyIdiomatic4()
+	fmt.Println("Concurrency Idiomatic 5")
+	ConcurrencyIdiomatic.ConcurrencyIdiomaticFive()
 }
